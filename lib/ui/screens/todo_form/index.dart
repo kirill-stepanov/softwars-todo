@@ -1,21 +1,23 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart';
+
 import 'package:softwars_todo/logic/models/todo.dart';
 import 'package:softwars_todo/logic/provider/todo_list.dart';
 import 'package:softwars_todo/logic/services/snackbar_service.dart';
+
 import 'package:softwars_todo/ui/components/button.dart';
 import 'package:softwars_todo/ui/components/error_message.dart';
-import 'package:softwars_todo/ui/screens/todo_form/components/todo_header.dart';
-import 'package:softwars_todo/ui/screens/todo_form/components/todo_datepicker.dart';
-import 'package:softwars_todo/ui/screens/todo_form/components/todo_description.dart';
 import 'package:softwars_todo/ui/screens/todo_form/components/todo_file.dart';
 import 'package:softwars_todo/ui/screens/todo_form/components/todo_types.dart';
 import 'package:softwars_todo/ui/screens/todo_form/components/todo_urgent.dart';
-import 'package:uuid/uuid.dart';
+import 'package:softwars_todo/ui/screens/todo_form/components/todo_header.dart';
+import 'package:softwars_todo/ui/screens/todo_form/components/todo_datepicker.dart';
+import 'package:softwars_todo/ui/screens/todo_form/components/todo_description.dart';
 
 enum TodoFormType {
   change,
@@ -43,7 +45,6 @@ class _TodoFormScreenState extends State<TodoFormScreen> {
   final Uuid uuid = const Uuid();
 
   bool _isInitialized = false;
-
   bool _showNameError = false;
   bool _showDateError = false;
 
@@ -97,7 +98,7 @@ class _TodoFormScreenState extends State<TodoFormScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    if (_isInitialized) return; // Skip if already initialized
+    if (_isInitialized) return;
 
     final arguments =
         ModalRoute.of(context)?.settings.arguments as TodoFormArguments?;

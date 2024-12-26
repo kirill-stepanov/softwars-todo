@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-String formatDate(DateTime date) {
+String formatDateToUkrainian(DateTime date) {
   const List<String> monthsUkrainian = [
     'січня',
     'лютого',
@@ -21,4 +21,8 @@ String formatDate(DateTime date) {
   String year = DateFormat('y').format(date);
 
   return '$day $month $year';
+}
+
+String formatDateToNumeric(DateTime date) {
+  return DateFormat('dd.MM.yyyy').format(date);
 }

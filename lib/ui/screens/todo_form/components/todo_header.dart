@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/ui/constants/colors.dart';
 
 class TodoHeader extends StatelessWidget {
@@ -13,6 +14,25 @@ class TodoHeader extends StatelessWidget {
     required this.onSave,
   });
 
+  final TextStyle inputTextStyle = const TextStyle(
+    color: AppColors.kPrimary,
+    fontFamily: 'SF-UI-Display',
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+  );
+
+  final Icon backIcon = const Icon(
+    Icons.arrow_back,
+    color: AppColors.kWarning,
+    size: 30,
+  );
+
+  final Icon saveIcon = const Icon(
+    Icons.done,
+    color: AppColors.kWarning,
+    size: 30,
+  );
+
   @override
   Widget build(BuildContext context) {
     const TextStyle hintTextStyle = TextStyle(
@@ -20,25 +40,6 @@ class TodoHeader extends StatelessWidget {
       fontFamily: 'SF-UI-Display',
       fontSize: 24,
       fontWeight: FontWeight.w600,
-    );
-
-    const TextStyle inputTextStyle = TextStyle(
-      color: AppColors.kPrimary,
-      fontFamily: 'SF-UI-Display',
-      fontSize: 24,
-      fontWeight: FontWeight.w600,
-    );
-
-    const Icon backIcon = Icon(
-      Icons.arrow_back,
-      color: AppColors.kWarning,
-      size: 30,
-    );
-
-    const Icon saveIcon = Icon(
-      Icons.done,
-      color: AppColors.kWarning,
-      size: 30,
     );
 
     const InputDecoration inputDecoration = InputDecoration(

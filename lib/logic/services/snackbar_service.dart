@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/ui/constants/colors.dart';
 
 class SnackbarService {
@@ -8,6 +9,7 @@ class SnackbarService {
     Duration duration = const Duration(seconds: 2),
   }) {
     if (!context.mounted) return;
+
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

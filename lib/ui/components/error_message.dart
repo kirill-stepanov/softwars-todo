@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/ui/constants/colors.dart';
 
 class ErrorMessage extends StatelessWidget {
@@ -23,11 +24,7 @@ class ErrorMessage extends StatelessWidget {
     return Visibility(
       visible: showErrorMessage,
       child: Padding(
-        padding: const EdgeInsets.only(
-          left: 16,
-          top: 8,
-          right: 16,
-        ),
+        padding: const EdgeInsets.only(left: 16, top: 8, right: 16),
         child: Text(
           errorMessage,
           style: textStyle,

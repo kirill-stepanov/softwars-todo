@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:softwars_todo/logic/provider/filters.dart';
 import 'package:softwars_todo/ui/screens/home/components/filters_button.dart';
 

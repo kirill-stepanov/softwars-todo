@@ -8,12 +8,12 @@ class RadioButton extends StatelessWidget {
   final ValueChanged<int> onChanged;
 
   const RadioButton({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     required this.groupValue,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   final TextStyle textStyle = const TextStyle(
     fontFamily: 'SF-UI-Display',

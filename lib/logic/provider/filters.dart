@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/logic/models/filter.dart';
 
 class FiltersProvider with ChangeNotifier {

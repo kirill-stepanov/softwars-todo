@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/ui/constants/colors.dart';
 
 class FiltersButton extends StatelessWidget {
@@ -7,11 +8,11 @@ class FiltersButton extends StatelessWidget {
   final void Function() onPressed;
 
   const FiltersButton({
-    Key? key,
+    super.key,
     required this.title,
     required this.isSelected,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +40,7 @@ class FiltersButton extends StatelessWidget {
     return OutlinedButton(
       style: buttonStyle,
       onPressed: onPressed,
-      child: Text(
-        title,
-        style: textStyle,
-      ),
+      child: Text(title, style: textStyle),
     );
   }
 }

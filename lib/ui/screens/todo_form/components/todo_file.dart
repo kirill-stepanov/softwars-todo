@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/ui/constants/colors.dart';
 import 'package:softwars_todo/ui/screens/todo_form/components/field_container.dart';
 
@@ -21,12 +22,12 @@ class TodoFile extends StatelessWidget {
     fontWeight: FontWeight.w600,
   );
 
-  List<Widget> showContent() {
+  List<Widget> buildContent() {
     if (file != null) {
       return [
         Text('Вкладене зображення', style: textStyle),
         const SizedBox(height: 10),
-        Image.memory(file as Uint8List),
+        Image.memory(file!),
       ];
     } else {
       return [
@@ -42,7 +43,7 @@ class TodoFile extends StatelessWidget {
         onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: showContent(),
+          children: buildContent(),
         ),
       ),
     );

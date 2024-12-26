@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
+
 import 'package:softwars_todo/logic/models/todo.dart';
 import 'package:softwars_todo/logic/provider/todo_list.dart';
 import 'package:softwars_todo/logic/services/snackbar_service.dart';
 import 'package:softwars_todo/logic/utils/date_formatting.dart';
+
 import 'package:softwars_todo/ui/components/custom_checkbox.dart';
 import 'package:softwars_todo/ui/constants/app_routes.dart';
 import 'package:softwars_todo/ui/constants/colors.dart';
@@ -13,9 +16,9 @@ class TodoListItem extends StatefulWidget {
   final Todo todo;
 
   const TodoListItem({
-    Key? key,
+    super.key,
     required this.todo,
-  }) : super(key: key);
+  });
 
   @override
   State<TodoListItem> createState() => _TodoListItemState();
@@ -31,7 +34,6 @@ class _TodoListItemState extends State<TodoListItem> {
         Provider.of<TodoListProvider>(context, listen: false);
 
     await todoList.changeStatus(widget.todo.taskId, _todoStatus);
-
     _snackbarService.showSnackbar(context, 'Статус оновлено');
   }
 
@@ -56,6 +58,20 @@ class _TodoListItemState extends State<TodoListItem> {
     );
   }
 
+  final TextStyle titleStyle = TextStyle(
+    fontFamily: 'SF-UI-Display',
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+    color: AppColors.kSecondary,
+  );
+
+  final TextStyle subtitleStyle = TextStyle(
+    fontFamily: 'SF-UI-Display',
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: AppColors.kSecondary,
+  );
+
   @override
   void initState() {
     _todoStatus = widget.todo.status;
@@ -64,20 +80,6 @@ class _TodoListItemState extends State<TodoListItem> {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle titleStyle = TextStyle(
-      fontFamily: 'SF-UI-Display',
-      fontSize: 16,
-      fontWeight: FontWeight.w600,
-      color: AppColors.kSecondary,
-    );
-
-    const TextStyle subtitleStyle = TextStyle(
-      fontFamily: 'SF-UI-Display',
-      fontSize: 10,
-      fontWeight: FontWeight.w400,
-      color: AppColors.kSecondary,
-    );
-
     return GestureDetector(
       onTap: _openTodo,
       child: Container(
@@ -89,7 +91,6 @@ class _TodoListItemState extends State<TodoListItem> {
               widget.todo.urgent == 1 ? AppColors.kDanger : AppColors.kPrimary,
         ),
         child: Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             if (widget.todo.type == 1)
               const Icon(
@@ -111,11 +112,11 @@ class _TodoListItemState extends State<TodoListItem> {
                   Text(
                     widget.todo.name,
                     style: titleStyle,
-                    softWrap: true, // Ensure wrapping is enabled
-                    overflow: TextOverflow.clip, // Avoid ellipsis
+                    softWrap: true,
+                    overflow: TextOverflow.clip,
                   ),
                   Text(
-                    formatDate(widget.todo.finishDate),
+                    formatDateToNumeric(widget.todo.finishDate),
                     style: subtitleStyle,
                   )
                 ],

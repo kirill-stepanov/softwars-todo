@@ -1,6 +1,8 @@
 import 'package:date_picker_plus/date_picker_plus.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:softwars_todo/logic/utils/date_formatting.dart';
 import 'package:softwars_todo/ui/constants/colors.dart';
 import 'package:softwars_todo/ui/screens/todo_form/components/field_container.dart';
@@ -45,7 +47,7 @@ class TodoDatepicker extends StatelessWidget {
       child: GestureDetector(
         onTap: showDatePicker,
         child: date != null
-            ? Text(formatDate(date!), style: textStyle)
+            ? Text(formatDateToUkrainian(date!), style: textStyle)
             : Text('Дата завершення:', style: textStyle),
       ),
     );

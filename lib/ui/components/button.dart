@@ -15,20 +15,22 @@ class Button extends StatelessWidget {
   final ButtonType type;
 
   const Button({
-    Key? key,
+    super.key,
     required this.title,
     this.onPressed,
     this.loading = false,
     this.type = ButtonType.primary,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final ButtonStyle buttonStyle = ElevatedButton.styleFrom(
+      padding: const EdgeInsets.all(10),
+      minimumSize: const Size(double.infinity, 10),
       backgroundColor: buttonColors[type],
       foregroundColor: AppColors.kBlack,
-      padding: const EdgeInsets.all(10),
-      minimumSize: const Size(double.infinity, 0),
+      disabledBackgroundColor: buttonColors[type],
+      disabledForegroundColor: AppColors.kBlack,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -40,9 +42,13 @@ class Button extends StatelessWidget {
       fontWeight: FontWeight.w600,
     );
 
-    final Widget buttonChild = loading
-        ? const CircularProgressIndicator(color: AppColors.kBackground)
-        : Text(title, style: textStyle);
+    const SizedBox icon = SizedBox(
+      height: 34,
+      width: 34,
+      child: CircularProgressIndicator(color: AppColors.kBackground),
+    );
+
+    final Widget buttonChild = loading ? icon : Text(title, style: textStyle);
 
     return ElevatedButton(
       onPressed: loading ? null : onPressed,

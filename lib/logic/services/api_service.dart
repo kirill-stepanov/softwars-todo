@@ -1,13 +1,17 @@
-import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+import 'package:softwars_todo/logic/services/network_service.dart';
 
 class ApiService {
-  final String baseUrl = dotenv.env['API_URL'].toString();
+  final String _baseUrl = dotenv.env['API_URL'].toString();
+  final NetworkService _networkService = NetworkService();
 
   Future<Map<String, dynamic>> get(String endpoint) async {
-    final url = Uri.parse('$baseUrl$endpoint');
+    final url = Uri.parse('$_baseUrl$endpoint');
 
     try {
       final response = await http.get(url);
@@ -18,6 +22,7 @@ class ApiService {
         throw Exception('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
+      _networkService.addToRetryQueue(() => get(endpoint));
       rethrow;
     }
   }
@@ -26,7 +31,7 @@ class ApiService {
     String endpoint,
     List<Map<String, dynamic>> body,
   ) async {
-    final url = Uri.parse('$baseUrl$endpoint');
+    final url = Uri.parse('$_baseUrl$endpoint');
 
     try {
       final response = await http.post(
@@ -41,6 +46,7 @@ class ApiService {
         throw Exception('Failed to post data: ${response.statusCode}');
       }
     } catch (e) {
+      _networkService.addToRetryQueue(() => post(endpoint, body));
       rethrow;
     }
   }
@@ -49,7 +55,7 @@ class ApiService {
     String endpoint,
     Map<String, int> body,
   ) async {
-    final url = Uri.parse('$baseUrl$endpoint');
+    final url = Uri.parse('$_baseUrl$endpoint');
 
     try {
       final response = await http.put(
@@ -64,12 +70,13 @@ class ApiService {
         throw Exception('Failed to post data: ${response.statusCode}');
       }
     } catch (e) {
+      _networkService.addToRetryQueue(() => put(endpoint, body));
       rethrow;
     }
   }
 
   Future<Map<String, dynamic>> delete(String endpoint) async {
-    final url = Uri.parse('$baseUrl$endpoint');
+    final url = Uri.parse('$_baseUrl$endpoint');
 
     try {
       final response = await http.delete(url);
@@ -80,6 +87,7 @@ class ApiService {
         throw Exception('Failed to load data: ${response.statusCode}');
       }
     } catch (e) {
+      _networkService.addToRetryQueue(() => delete(endpoint));
       rethrow;
     }
   }
